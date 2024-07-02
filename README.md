@@ -17,6 +17,7 @@ $result = Intersection::fetch($value, [
     'admin' => function () {
         return 'Alice';
     },
+    'owner' => 'Michael',
 ], true);
 
 // $result: 'Alice'

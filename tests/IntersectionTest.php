@@ -21,7 +21,7 @@ class IntersectionTest extends TestCase
     /**
      * @test
      */
-    public function test_fetch()
+    public function fetch_関数型()
     {
         $value = 'admin';
         $result = Intersection::fetch($value, [
@@ -31,7 +31,25 @@ class IntersectionTest extends TestCase
             'admin' => function () {
                 return 'Alice';
             },
+            'owner' => 'Michael',
         ], true);
         $this->assertSame('Alice', $result);
+    }
+    /**
+     * @test
+     */
+    public function fetch_変数型()
+    {
+        $value = 'owner';
+        $result = Intersection::fetch($value, [
+            'user' => function () {
+                return 'John';
+            },
+            'admin' => function () {
+                return 'Alice';
+            },
+            'owner' => 'Michael',
+        ], true);
+        $this->assertSame('Michael', $result);
     }
 }
