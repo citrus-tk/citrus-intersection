@@ -19,7 +19,7 @@ class Intersection
      * 基本switch比較
      *
      * @param mixed $value     比較
-     * @param array $functions key:比較値, value:callable
+     * @param array $functions key:比較値, value:callable or value
      * @param bool  $strict    true:厳密比較
      * @return mixed|null callableが返却する値
      */
@@ -30,7 +30,13 @@ class Intersection
             // 厳密比較
             if ((true === $strict and $value === $ky) or (false === $strict and $value == $ky))
             {
-                return $function();
+                // 関数型
+                if (true === is_callable($function))
+                {
+                    return $function();
+                }
+                // 変数型
+                return $function;
             }
         }
         return null;
